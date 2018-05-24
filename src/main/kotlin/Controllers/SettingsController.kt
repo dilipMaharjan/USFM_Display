@@ -1,5 +1,6 @@
 package Controllers
 
+import app.USFMApp
 import javafx.beans.property.SimpleBooleanProperty
 import tornadofx.*
 
@@ -10,8 +11,10 @@ class SettingsController: Controller(){
     fun toggleTheme(){
         themeIsLight.value = !(themeIsLight.value)
         themeIsDark.value = !(themeIsDark.value)
-        println("themeIsLight = ${themeIsLight.value}")
-        println("themeIsDark= ${themeIsDark.value}")
+
+        if(themeIsDark.value){
+
+        }
     }
 }
 enum class BackGroundTheme{light, dark}
