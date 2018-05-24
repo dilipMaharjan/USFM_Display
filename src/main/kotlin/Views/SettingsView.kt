@@ -1,9 +1,14 @@
 package Views
 
 import javafx.geometry.Pos
+import Controllers.SettingsController
+import javafx.scene.control.ToggleGroup
 import tornadofx.*
 
 class SettingsView: View("Settings"){
+    val settings: SettingsController by inject()
+    private val toggleGroup = ToggleGroup()
+
     override val root = vbox(){
         setPrefSize(300.0, 200.0)
         hbox(){
@@ -12,17 +17,21 @@ class SettingsView: View("Settings"){
                 marginLeft = 10.0
                 marginTop = 10.0
             }
-            togglegroup(){
-                vbox {
-                    label("Theme")
-                    radiobutton("Light") {
+            vbox {
+                label("Theme")
+                radiobutton("Light", toggleGroup) {
 
+                    action {
+                        settings.toggleTheme()
                     }
-                    radiobutton("Dark") {
-
+                }
+                radiobutton("Dark", toggleGroup) {
+                    action {
+                        settings.toggleTheme()
                     }
                 }
             }
+
         }
     }
 }
