@@ -10,7 +10,17 @@ import javafx.stage.FileChooser
 class WelcomeView: View("Welcome"){
     val store: Store by inject()
     override val root = vbox(5){
-        setPrefSize(300.0, 100.0)
+        setPrefSize(300.0, 150.0)
+        menubar(){
+            menu("File") {
+                item("Open")
+                item("Settings"){
+                    action{
+                        find(SettingsView::class).openWindow()
+                    }
+                }
+            }
+        }
         hbox{
             alignment = Pos.BASELINE_RIGHT
             label("Select Book"){
