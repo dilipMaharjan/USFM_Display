@@ -21,7 +21,6 @@ class BookView : View() {
     var verses = SimpleStringProperty()
     var versesChanged = objectBinding(verses) { verses }
 
-    var allVerses = ""
 
     init {
         val (title, verse) = getChapterText(chapterNumChanged.value!!.value)
@@ -125,8 +124,8 @@ class BookView : View() {
         val sb = StringBuilder()
         val verses = verse.split("\n")
 
-        var startV = if (from == "") 1 else from.toInt()
-        var endV = if (to == "") verses.size else to.toInt()
+        var startV = if (from == "") 1 else Math.abs(from.toInt())
+        var endV = if (to == "") verses.size else Math.abs(to.toInt())
 
         if (startV > endV || endV > verses.size) {
             endV = verses.size
