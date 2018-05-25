@@ -16,7 +16,6 @@ class Store: Controller(){
     val titleProperty = SimpleStringProperty("")
     var book = Book(titleProperty.value)
     val display = SimpleStringProperty("")
-    val textView: TextView by inject()
 
     fun addVerse(chapter: Chapter, text:String){
         var newVerse = Verse(text.removePrefix("\\v").trim())
@@ -63,7 +62,6 @@ class Store: Controller(){
         if(fileContents.value != null)
             this.parseText(fileContents.value)
     }
-    enum class BackGroundTheme{light, dark}
 }
 
 

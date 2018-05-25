@@ -11,7 +11,7 @@ class ToolBar: View(){
             item("Save"){}
             item("Settings"){
                 action{
-                    find(SettingsView::class).openModal()
+                    find(SettingsView::class).openWindow()
                 }
             }
         }
