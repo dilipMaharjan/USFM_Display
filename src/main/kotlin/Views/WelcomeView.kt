@@ -1,19 +1,19 @@
 package Views
 
+import Controller.Store
 import javafx.geometry.Pos
 import javafx.scene.text.Font
 import javafx.scene.text.FontWeight
-import tornadofx.*
-import Controller.Store
 import javafx.stage.FileChooser
+import tornadofx.*
 
-class WelcomeView: View("Welcome"){
+class WelcomeView : View("Welcome") {
     val store: Store by inject()
-    override val root = vbox(5){
+    override val root = vbox(5) {
         setPrefSize(300.0, 100.0)
-        hbox{
+        hbox {
             alignment = Pos.BASELINE_RIGHT
-            label("Select Book"){
+            label("Select Book") {
                 font = Font.font("verdanna", FontWeight.BOLD, 13.0)
                 hboxConstraints {
                     marginRight = 40.0
@@ -23,7 +23,7 @@ class WelcomeView: View("Welcome"){
         }
         hbox {
             alignment = Pos.CENTER
-            button("Load USFM"){
+            button("Load USFM") {
                 prefWidth = 110.0
                 alignment = Pos.CENTER
                 isDefaultButton = true
@@ -33,7 +33,12 @@ class WelcomeView: View("Welcome"){
                 }
                 action {
                     store.loadFile(filters = arrayOf(FileChooser.ExtensionFilter("USFM File", "*.usfm")))
-                    find(WelcomeView::class).replaceWith(TextView::class, sizeToScene = true, centerOnScreen = true)
+                    find(WelcomeView::class).replaceWith(
+                        TextView::class,
+                        ViewTransition.Slide(
+                            0.5.seconds, ViewTransition.Direction.UP
+                        ), sizeToScene = true, centerOnScreen = true
+                    )
                 }
             }
             combobox<String> {

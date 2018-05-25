@@ -16,7 +16,6 @@ class Store : Controller() {
     val titleProperty = SimpleStringProperty("")
     var book = Book(titleProperty.value)
     val display = SimpleStringProperty("")
-    val textView: TextView by inject()
 
     fun addVerse(chapter: Chapter, text: String) {
         var newVerse = Verse(text.removePrefix("\\v").trim())
