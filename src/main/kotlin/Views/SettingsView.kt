@@ -11,9 +11,11 @@ class SettingsView: View("Settings"){
             field{
                 vbox {
                     togglegroup{
+                        //create a radio button for each of the themes
                         settings.settings.themes.forEach{theme ->
                             radiobutton(theme.simpleName, getToggleGroup(), theme){
-                                isSelected = (theme.simpleName == "LightTheme")
+                                //the light theme will be
+                                isSelected = (title == "LightTheme")
                                 action {
                                     settings.changeTheme()
                                 }

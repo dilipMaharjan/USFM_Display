@@ -12,6 +12,7 @@ class Settings(){
     val activeThemeProperty = SimpleObjectProperty<KClass<out Stylesheet>>()
     private var activeTheme by activeThemeProperty
     init{
+        //adding event listener to change the background theme for the app
         activeThemeProperty.addListener{_, oldTheme, newTheme ->
             oldTheme?.let { removeStylesheet(it) }
             newTheme?.let { importStylesheet(it) }
