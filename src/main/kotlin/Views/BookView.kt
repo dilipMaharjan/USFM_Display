@@ -21,6 +21,8 @@ class BookView : View() {
     var verses = SimpleStringProperty()
     var versesChanged = objectBinding(verses) { verses }
 
+    var allVerses = ""
+
     init {
         val (title, verse) = getChapterText(chapterNumChanged.value!!.value)
         chapterTitle.value = title
@@ -47,7 +49,12 @@ class BookView : View() {
                     strokeWidth = 0.75
                 }
                 text(stringBinding(versesChanged) { versesChanged.value!!.value })
+            }
+        }
 
+        label("Chapter") {
+            style {
+                padding = box(5.px)
             }
         }
         hbox {
@@ -64,6 +71,24 @@ class BookView : View() {
                 val (title, verse) = getChapterText(chapterNumChanged.value!!.value)
                 chapterTitle.value = title
                 verses.value = verse
+            }
+        }
+        label("Verses") {
+            style {
+                padding = box(5.px)
+            }
+        }
+        hbox(2) {
+            label("From")
+            val tfStart = textfield()
+            label("To")
+            val tfEnd = textfield()
+            button("OK") {
+                action {
+                    verses.value = getVerses(tfStart.text, tfEnd.text)
+                    tfStart.clear()
+                    tfEnd.clear()
+                }
             }
         }
     }
@@ -93,5 +118,23 @@ class BookView : View() {
             continue
         }
         return Pair(chapterTitle, sb.toString())
+    }
+
+    private fun getVerses(from: String, to: String): String {
+        val (title, verse) = getChapterText(chapterNumChanged.value!!.value)
+        val sb = StringBuilder()
+        val verses = verse.split("\n")
+
+        var startV = if (from == "") 1 else from.toInt()
+        var endV = if (to == "") verses.size else to.toInt()
+
+        if (startV > endV || endV > verses.size) {
+            endV = verses.size
+        }
+        val sublist = verses.subList(startV - 1, endV)
+        for (s in sublist) {
+            sb.append(s).append("").append("\n")
+        }
+        return sb.toString()
     }
 }
