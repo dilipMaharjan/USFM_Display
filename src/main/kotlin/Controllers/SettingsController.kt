@@ -1,20 +1,24 @@
 package Controllers
 
-import app.USFMApp
-import javafx.beans.property.SimpleBooleanProperty
+import Models.BackGroundThemeState
 import tornadofx.*
+import Models.Settings
+import Models.BackGroundThemeState.Dark
+import Models.BackGroundThemeState.Light
 
 class SettingsController: Controller(){
-    val themeIsLight = SimpleBooleanProperty(true)
-    val themeIsDark = SimpleBooleanProperty(false)
+    private var settings = Settings()
 
-    fun toggleTheme(){
-        themeIsLight.value = !(themeIsLight.value)
-        themeIsDark.value = !(themeIsDark.value)
-
-        if(themeIsDark.value){
-
+    fun changeTheme(state: BackGroundThemeState){
+        when(state){
+            Light -> settings.BackGroundTheme = Light
+            Dark  -> settings.BackGroundTheme = Dark
         }
+//        println("BackGroundTheme is set to ${settings.BackGroundTheme}")
+        when(settings.BackGroundTheme){
+//            Light -> break
+//            Dark  -> importStylesheet(app.DarkThemeStyleSheet)
+        }
+        reloadStylesheetsOnFocus()
     }
 }
-enum class BackGroundTheme{light, dark}

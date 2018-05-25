@@ -1,8 +1,9 @@
 package Views
 
-import Controllers.BackGroundTheme
 import javafx.geometry.Pos
 import Controllers.SettingsController
+import Models.BackGroundThemeState.Dark
+import Models.BackGroundThemeState.Light
 import javafx.scene.control.ToggleGroup
 import tornadofx.*
 
@@ -21,16 +22,14 @@ class SettingsView: View("Settings"){
                 paddingBottom = 90.0
                 label("Theme")
                 radiobutton("Light", toggleGroup){
-                    isSelected = settings.themeIsLight.value
-//                    isSelected = bind{settings.themeIsLight.value}
+                    isSelected = true
                     action {
-                        settings.toggleTheme()
+                      settings.changeTheme(Light)
                     }
                 }
                 radiobutton("Dark", toggleGroup) {
-                    isSelected = settings.themeIsDark.value
                     action {
-                        settings.toggleTheme()
+                        settings.changeTheme(Dark)
                     }
                 }
             }
