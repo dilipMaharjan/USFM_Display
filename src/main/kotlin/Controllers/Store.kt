@@ -65,7 +65,6 @@ class Store : Controller() {
         if (fileContents.value != null)
             this.parseText(fileContents.value)
     }
-
     enum class BackGroundTheme { light, dark }
 
     fun getChapterNumber(string: String): Int {
