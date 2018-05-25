@@ -1,6 +1,5 @@
 package Models
 
-import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
