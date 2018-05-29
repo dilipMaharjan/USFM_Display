@@ -79,9 +79,13 @@ class BookView : View() {
         }
         hbox(2) {
             label("From")
-            val tfStart = textfield()
+            val tfStart = textfield {
+                filterInput { it.controlNewText.isInt() }
+            }
             label("To")
-            val tfEnd = textfield()
+            val tfEnd = textfield {
+                filterInput { it.controlNewText.isInt() }
+            }
             button("OK") {
                 action {
                     verses.value = getVerses(tfStart.text, tfEnd.text)
